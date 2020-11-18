@@ -8,3 +8,7 @@ It sends 7 byte acceleration and steering messages in the following format:
 
 It also receives and displays any short String message, as long as that message starts with the 0x01 character.
 
+Screenshot:
+![alt text](https://github.com/vspruyt/RoboControl/raw/main/screenshot.jpeg "App Screenshot")
+
+
