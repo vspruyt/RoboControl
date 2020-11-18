@@ -16,6 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dH8-il-gIk">
+                                <rect key="frame" x="426" y="173" width="312" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="minimumTrackTintColor" systemColor="systemPinkColor"/>
+                                <color key="maximumTrackTintColor" systemColor="systemGreenColor"/>
+                                <connections>
+                                    <action selector="SpeedChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="g17-6j-hvj"/>
+                                    <action selector="SpeedReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d6Y-9a-gX0"/>
+                                    <action selector="SpeedReleasedOutside:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="xXz-1P-Wwx"/>
+                                </connections>
+                            </slider>
                             <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="A4R-0G-V9J">
                                 <rect key="frame" x="18" y="290" width="418" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -36,25 +47,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dH8-il-gIk">
-                                <rect key="frame" x="426" y="173" width="312" height="31"/>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g9X-a5-v1E">
+                                <rect key="frame" x="673" y="290" width="43" height="8"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="minimumTrackTintColor" systemColor="systemPinkColor"/>
-                                <color key="maximumTrackTintColor" systemColor="systemGreenColor"/>
-                                <connections>
-                                    <action selector="SpeedChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="g17-6j-hvj"/>
-                                    <action selector="SpeedReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d6Y-9a-gX0"/>
-                                    <action selector="SpeedReleasedOutside:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="xXz-1P-Wwx"/>
-                                </connections>
-                            </slider>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                            </view>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F7H-aw-Crr">
+                                <rect key="frame" x="673" y="306" width="43" height="8"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <connections>
                         <outlet property="logarea" destination="c07-bH-4Un" id="6Jd-Sr-64S"/>
+                        <outlet property="speed_origin_line" destination="g9X-a5-v1E" id="N9G-3o-FvT"/>
                         <outlet property="speedcontrol" destination="dH8-il-gIk" id="vZ1-29-Hu1"/>
                         <outlet property="steercontrol" destination="A4R-0G-V9J" id="nak-4E-LlP"/>
+                        <outlet property="steering_origin_line" destination="F7H-aw-Crr" id="KbU-u4-xKD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -65,6 +79,9 @@
     <resources>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -41,9 +41,46 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     @IBOutlet weak var logarea: UITextView!
     
+    @IBOutlet weak var speed_origin_line: UIView!
+    
+    @IBOutlet weak var steering_origin_line: UIView! {
+        didSet {
+            steering_origin_line.transform = CGAffineTransform(rotationAngle: -CGFloat.pi/2)
+        } // didSet
+    } // IBOutlet
+    
     var prev_speed: Float = 0.0;
     var prev_steer: Float = 0.0;
     var prev_ble_sent_time = CACurrentMediaTime();
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let speed_line_x = speedcontrol.center.x - speed_origin_line.frame.width/2.0;
+        
+        let speed_line_y = speedcontrol.center.y - speed_origin_line.frame.height/2.0;
+        
+        speed_origin_line.frame = CGRect(x:speed_line_x, y:speed_line_y, width:speed_origin_line.frame.width, height:speed_origin_line.frame.height)
+        
+        speed_origin_line.layer.zPosition = -1;
+        
+        let steer_line_x = steercontrol.center.x - steering_origin_line.frame.width/2.0;
+        
+        let steer_line_y = steercontrol.center.y - steering_origin_line.frame.height/2.0;
+        
+        steering_origin_line.frame = CGRect(x:steer_line_x, y:steer_line_y, width:steering_origin_line.frame.width, height:steering_origin_line.frame.height)
+        
+        steering_origin_line.layer.zPosition = -1;
+        
+        centralManager = CBCentralManager(delegate: self, queue: nil);
+        
+        // Add a gesture recognizer to the slider
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(speedSliderTapped(gestureRecognizer:)))
+        speedcontrol.addGestureRecognizer(tapGestureRecognizer)
+        
+        let steertapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(steerSliderTapped(gestureRecognizer:)))
+        steercontrol.addGestureRecognizer(steertapGestureRecognizer)
+    }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == CBManagerState.poweredOn {
@@ -175,20 +212,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         
         peripheral.discoverServices([BLEService_UUID])
     }
-        
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        centralManager = CBCentralManager(delegate: self, queue: nil);
-        
-        // Add a gesture recognizer to the slider
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(speedSliderTapped(gestureRecognizer:)))
-        speedcontrol.addGestureRecognizer(tapGestureRecognizer)
-        
-        let steertapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(steerSliderTapped(gestureRecognizer:)))
-        steercontrol.addGestureRecognizer(steertapGestureRecognizer)
-    }
     
     @objc func speedSliderTapped(gestureRecognizer: UIGestureRecognizer) {
             //  print("A")
