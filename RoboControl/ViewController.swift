@@ -258,7 +258,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         // We are also receiving about 30 bytes per message, so that is 240 bits.
         // That means we can send 32 messages per second.
         // So we need about 32 milliseconds between each message.
-        if(timediff>=32 && (abs(prev_speed-val) >= 0.01 || sign_switch)){
+        if((timediff>=32 && (abs(prev_speed-val) >= 0.01 || sign_switch)) || (val==0.0 && prev_speed != 0.0)){
             var bytes:Array<UInt8> = [ 0x01, 0x02, 0, 0, 0, 0, 0 ];
             
             memcpy(&(bytes[3]), &val, 4);
@@ -290,7 +290,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         // We are also receiving about 30 bytes per message, so that is 240 bits.
         // That means we can send 32 messages per second.
         // So we need about 32 milliseconds between each message.
-        if(timediff>=32 && (abs(prev_steer-val) >= 0.01 || sign_switch)){
+        if((timediff>=32 && (abs(prev_steer-val) >= 0.01 || sign_switch)) || (val==0.0 && prev_steer != 0.0)){
             var bytes:Array<UInt8> = [ 0x01, 0x02, 1, 0, 0, 0, 0 ];
             memcpy(&(bytes[3]), &val, 4);
             let Transmitdata = NSData(bytes: bytes, length: bytes.count)
